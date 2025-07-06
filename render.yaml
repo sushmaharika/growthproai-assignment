@@ -2,11 +2,9 @@ services:
   - type: web
     name: growthproai-frontend
     env: static
-    buildCommand: npm install && NODE_ENV=production npm run build
+    buildCommand: npm install && npm run build
     staticPublishPath: ./build
     envVars:
-      - key: REACT_APP_API_URL
-        value: https://growthproai-backendpart.onrender.com
       - key: NODE_VERSION
         value: 22.14.0
     headers:

@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: growthproai-backend
+    name: growthproai-bpart1
     env: node
     buildCommand: npm install
     startCommand: npm start

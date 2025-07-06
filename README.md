@@ -1,106 +1,63 @@
-# Business Dashboard
+# GrowthPro AI
 
-A modern, responsive dashboard for small businesses to view their SEO content and Google Business data. Built with React, Express, Tailwind CSS, and Framer Motion.
+A modern business analytics dashboard built with React and Node.js.
 
-## Features
-
-- 🎨 Modern UI with glassmorphic design and 3D animations
-- 📱 Fully responsive layout
-- 🔄 Real-time data simulation
-- ✨ Interactive SEO headline generation
-- 🌟 Business ratings and reviews display
-- 🎭 Smooth transitions and loading states
-
-## Tech Stack
+## Development Setup
 
 ### Frontend
-- React
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- Headless UI
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+2. Create `.env` file in the root directory with:
+   ```
+   REACT_APP_API_URL=http://localhost:5000
+   ```
+3. Start development server:
+   ```bash
+   npm start
+   ```
 
 ### Backend
-- Node.js
-- Express
+1. Navigate to server directory:
+   ```bash
+   cd server
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Create `.env` file in the server directory with:
+   ```
+   PORT=5000
+   CORS_ORIGINS=http://localhost:3000,https://your-frontend-url.onrender.com
+   ```
+4. Start development server:
+   ```bash
+   npm run dev
+   ```
 
-## Getting Started
+## Deployment (Render)
 
-### Prerequisites
+### Environment Variables
 
-- Node.js (v14 or higher)
-- npm or yarn
+#### Frontend
+Set these in Render dashboard:
+- `REACT_APP_API_URL`: Your backend API URL
 
-### Installation
+#### Backend
+Set these in Render dashboard:
+- `PORT`: Default is 5000
+- `CORS_ORIGINS`: Comma-separated list of allowed origins (e.g., `https://your-frontend-url.onrender.com,http://localhost:3000`)
 
-1. Clone the repository
-```bash
-git clone <repository-url>
-cd growthproai
-```
+### Node.js Version
+Both frontend and backend use Node.js v22.x
 
-2. Install frontend dependencies
-```bash
-npm install
-```
+### Build Commands
+- Frontend: Automatically handled by render.yaml
+- Backend: Automatically handled by render.yaml
 
-3. Install backend dependencies
-```bash
-cd server
-npm install
-```
-
-### Running the Application
-
-1. Start the backend server
-```bash
-cd server
-npm run dev
-```
-The server will start on http://localhost:5000
-
-2. In a new terminal, start the frontend development server
-```bash
-npm start
-```
-The application will open in your browser at http://localhost:3000
-
-## API Endpoints
-
-### POST /business-data
-Submit business information to get ratings and SEO headline.
-
-```json
-// Request body
-{
-  "name": "Business Name",
-  "location": "Business Location"
-}
-
-// Response
-{
-  "rating": 4.5,
-  "reviews": 127,
-  "headline": "Generated SEO Headline"
-}
-```
-
-### GET /regenerate-headline
-Generate a new SEO headline for the business.
-
-```
-GET /regenerate-headline?name=Business%20Name&location=Business%20Location
-
-// Response
-{
-  "headline": "New Generated Headline"
-}
-```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
+## Security Notes
+- Never commit .env files
+- Always use environment variables for sensitive data
+- Set proper CORS origins in production

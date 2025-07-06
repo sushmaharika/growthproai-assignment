@@ -13,9 +13,15 @@ app.get('/', (req, res) => {
   });
 });
 
+// Load environment variables
+require('dotenv').config();
+
+// CORS configuration
+const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000').split(',');
+
 // Middleware
 app.use(cors({
-  origin: ['https://growthproai-frontend.onrender.com', 'http://localhost:3000', 'https://growthproai-backendpart.onrender.com'],
+  origin: allowedOrigins,
   methods: ['GET', 'POST'],
   credentials: true
 }));
