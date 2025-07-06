@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: growthproai-frontend-01
+    name: growthproai-frontend-02
     env: static
     buildCommand: npm install && npm run build
     staticPublishPath: ./build
