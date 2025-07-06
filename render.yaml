@@ -6,7 +6,7 @@ services:
     staticPublishPath: ./build
     envVars:
       - key: NODE_VERSION
-        value: 22.14.0
+        value: "22.14.0"
     headers:
       - path: /*
         name: Cache-Control
