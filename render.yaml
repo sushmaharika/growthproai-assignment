@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: growthproai-frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./build
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://growthproai-backend-mbn7.onrender.com

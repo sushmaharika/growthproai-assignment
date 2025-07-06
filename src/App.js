@@ -5,7 +5,7 @@ import { indianLocations } from './data/locations';
 import AnimatedBackground from './components/AnimatedBackground';
 import BusinessBackground from './components/BusinessBackground';
 
-const API_URL = 'http://localhost:5000';
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
 
 function App() {
   const [businessData, setBusinessData] = useState(null);

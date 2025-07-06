@@ -3,7 +3,11 @@ const cors = require('cors');
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: ['https://growthproai-frontend.onrender.com', 'http://localhost:3000'],
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 app.use(express.json());
 
 // Simulated headlines for random selection
