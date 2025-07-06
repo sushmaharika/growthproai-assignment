@@ -2,6 +2,17 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 
+// Root route
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Welcome to GrowthPro AI API',
+    endpoints: {
+      'POST /business-data': 'Generate business data including rating, reviews, and headline',
+      'GET /regenerate-headline': 'Generate a new headline for given business name and location'
+    }
+  });
+});
+
 // Middleware
 app.use(cors({
   origin: ['https://growthproai-frontend.onrender.com', 'http://localhost:3000', 'https://growthproai-backendpart.onrender.com'],
