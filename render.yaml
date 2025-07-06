@@ -5,4 +5,4 @@ services:
     staticPublishPath: ./build
     envVars:
       - key: REACT_APP_API_URL
-        value: https://growthproai-backend-mbn7.onrender.com
+        value: https://growthproai-backendpart.onrender.com

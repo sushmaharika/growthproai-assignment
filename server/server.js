@@ -4,7 +4,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: ['https://growthproai-frontend.onrender.com', 'http://localhost:3000'],
+  origin: ['https://growthproai-frontend.onrender.com', 'http://localhost:3000', 'https://growthproai-backendpart.onrender.com'],
   methods: ['GET', 'POST'],
   credentials: true
 }));
