@@ -18,14 +18,28 @@ require('dotenv').config();
 
 // CORS configuration
 const allowedOrigins = (process.env.CORS_ORIGINS || 'http://localhost:3000').split(',');
+console.log('Allowed Origins:', allowedOrigins);
 
 // Middleware
 app.use(cors({
-  origin: allowedOrigins,
+  origin: function(origin, callback) {
+    console.log('Request Origin:', origin);
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST'],
   credentials: true
 }));
 app.use(express.json());
+
+// Request logging middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`, req.body);
+  next();
+});
 
 // Simulated headlines for random selection
 const headlineTemplates = [
@@ -60,31 +74,47 @@ const generateHeadline = (name, location) => {
 
 // POST endpoint for business data
 app.post('/business-data', (req, res) => {
-  const { name, location } = req.body;
-  
-  if (!name || !location) {
-    return res.status(400).json({ error: 'Name and location are required' });
+  try {
+    console.log('Received business data request:', req.body);
+    const { name, location } = req.body;
+    
+    if (!name || !location) {
+      console.log('Missing required fields:', { name, location });
+      return res.status(400).json({ error: 'Name and location are required' });
+    }
+
+    const businessData = {
+      rating: parseFloat(generateRating()),
+      reviews: generateReviews(),
+      headline: generateHeadline(name, location)
+    };
+
+    console.log('Generated business data:', businessData);
+    res.json(businessData);
+  } catch (error) {
+    console.error('Error generating business data:', error);
+    res.status(500).json({ error: 'Failed to generate business data', details: error.message });
   }
-
-  const businessData = {
-    rating: parseFloat(generateRating()),
-    reviews: generateReviews(),
-    headline: generateHeadline(name, location)
-  };
-
-  res.json(businessData);
 });
 
 // GET endpoint for headline regeneration
 app.get('/regenerate-headline', (req, res) => {
-  const { name, location } = req.query;
+  try {
+    console.log('Received headline regeneration request:', req.query);
+    const { name, location } = req.query;
 
-  if (!name || !location) {
-    return res.status(400).json({ error: 'Name and location are required' });
+    if (!name || !location) {
+      console.log('Missing required fields:', { name, location });
+      return res.status(400).json({ error: 'Name and location are required' });
+    }
+
+    const newHeadline = generateHeadline(name, location);
+    console.log('Generated new headline:', newHeadline);
+    res.json({ headline: newHeadline });
+  } catch (error) {
+    console.error('Error regenerating headline:', error);
+    res.status(500).json({ error: 'Failed to regenerate headline', details: error.message });
   }
-
-  const newHeadline = generateHeadline(name, location);
-  res.json({ headline: newHeadline });
 });
 
 // Error handling middleware
